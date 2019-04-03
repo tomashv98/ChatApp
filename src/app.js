@@ -17,7 +17,8 @@ const {
   addUser,
   removeUser,
   getUser,
-  getUsersInRoom
+  getUsersInRoom,
+  getRoomList
 } = require("./utils/users")
 
 const port = process.env.PORT || 8080;
@@ -38,6 +39,8 @@ io.on("connection", (socket) => {
     room
   }, callback) => {
 
+    removeUser(socket.id);
+
     const {
       error,
       user
@@ -51,6 +54,8 @@ io.on("connection", (socket) => {
     }
 
     socket.join(user.room)
+
+
 
     socket.emit("message", generateMes("ChatApp", `Welcome to chatroom no.${user.room}`))
 
@@ -94,7 +99,10 @@ io.on("connection", (socket) => {
     }
 
   })
-
+  socket.on('getRoomlist', (no, callback) => {
+    const rooms = getRoomlist();
+    callback(rooms);
+  });
 })
 
 
