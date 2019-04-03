@@ -62,7 +62,6 @@ const getUsersInRoom = (room) => {
 
 const getRoomList = () => {
   const uniqueRooms = [...new Set(users.map(user => user.room))]
-  console.log(uniqueRooms)
   return uniqueRooms
 }
 

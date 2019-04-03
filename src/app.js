@@ -34,9 +34,8 @@ io.on("connection", (socket) => {
 
   console.log("An user has connected to the app")
 
-  const rooms = getRoomList();
 
-  socket.emit('getRoomList', rooms);
+  socket.emit('getRoomList', getRoomList());
 
 
   socket.on("join", ({

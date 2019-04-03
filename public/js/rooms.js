@@ -6,8 +6,6 @@ socket.on("getRoomList", (rooms) => {
     rooms.forEach(room => {
       const html = `<option>${room}</option>`
       select.insertAdjacentHTML("beforeend", html)
-
-
     });
   }
 
