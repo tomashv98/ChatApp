@@ -34,6 +34,11 @@ io.on("connection", (socket) => {
 
   console.log("An user has connected to the app")
 
+  const rooms = getRoomList();
+
+  socket.emit('getRoomList', rooms);
+
+
   socket.on("join", ({
     username,
     room
@@ -52,10 +57,11 @@ io.on("connection", (socket) => {
     if (error) {
       return callback(error)
     }
+    if (!user.username || !user.room) {
+      alert("Room and Username must be filled in")
+    }
 
     socket.join(user.room)
-
-
 
     socket.emit("message", generateMes("ChatApp", `Welcome to chatroom no.${user.room}`))
 
@@ -65,8 +71,12 @@ io.on("connection", (socket) => {
       room: user.room,
       users: getUsersInRoom(user.room)
     })
+
+
     callback()
   })
+
+
 
   socket.on("newMessage", (message, callback) => {
     const user = getUser(socket.id)
@@ -91,7 +101,7 @@ io.on("connection", (socket) => {
   socket.on("disconnect", () => {
     const user = removeUser(socket.id);
     if (user) {
-      io.emit("message", generateMes("ChatApp", `${user.username} had left the chat`))
+      io.to(user.room).emit("message", generateMes("ChatApp", `${user.username} had left the chat`))
       io.to(user.room).emit("roomData", {
         room: user.room,
         users: getUsersInRoom(user.room)
@@ -99,12 +109,8 @@ io.on("connection", (socket) => {
     }
 
   })
-  socket.on('getRoomlist', (no, callback) => {
-    const rooms = getRoomlist();
-    callback(rooms);
-  });
-})
 
+})
 
 
 

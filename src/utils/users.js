@@ -5,15 +5,15 @@ const addUser = ({
   username,
   room
 }) => {
-
-  username = username.trim().toLowerCase();
-  room = room.trim().toLowerCase()
-
   if (!username || !room) {
     return {
       error: "Username and room are required"
     }
   }
+  username = username.trim().toLowerCase();
+  room = room.trim().toLowerCase()
+
+
   const existingUser = users.find((user) => {
     return user.room === room && user.username === username
   })
@@ -53,13 +53,17 @@ const getUser = (id) => {
 }
 
 const getUsersInRoom = (room) => {
+  if (!room) {
+    return alert("Please fill in room name")
+  }
   room = room.trim().toLowerCase()
   return users.filter((user) => user.room === room)
 }
 
 const getRoomList = () => {
-  const uniquerooms = [...new Set(this.users.map(obj => obj.room))];
-  return uniquerooms;
+  const uniqueRooms = [...new Set(users.map(user => user.room))]
+  console.log(uniqueRooms)
+  return uniqueRooms
 }
 
 module.exports = {
