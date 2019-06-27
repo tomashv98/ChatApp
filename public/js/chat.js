@@ -9,6 +9,8 @@ const $messages = document.querySelector("#messages")
 
 // Templates
 const messageTemplate = document.querySelector("#message-temp").innerHTML
+const leftTemplate = document.querySelector("#left-temp").innerHTML
+const joinTemplate = document.querySelector("#join-temp").innerHTML
 const locationTemplate = document.querySelector("#location-temp").innerHTML
 const sidebarTemplate = document.querySelector("#sidebar-temp").innerHTML
 
@@ -52,9 +54,29 @@ $messageForm.addEventListener("submit", (e) => {
   })
 })
 
-// Listen for "message"event, loggin whatever inserted as 2nd arguement. 
+// Listen for "message" event, loggin whatever inserted as 2nd arguement. 
 socket.on("message", (message) => {
   const html = Mustache.render(messageTemplate, {
+    message: message.text,
+    username: message.username,
+    createdAt: moment(message.createdAt).format("h:mm a")
+  });
+  $messages.insertAdjacentHTML("beforeend", html)
+  autoscroll()
+})
+
+socket.on("userJoin", (message) => {
+  const html = Mustache.render(joinTemplate, {
+    message: message.text,
+    username: message.username,
+    createdAt: moment(message.createdAt).format("h:mm a")
+  });
+  $messages.insertAdjacentHTML("beforeend", html)
+  autoscroll()
+})
+
+socket.on("userLeft", (message) => {
+  const html = Mustache.render(leftTemplate, {
     message: message.text,
     username: message.username,
     createdAt: moment(message.createdAt).format("h:mm a")

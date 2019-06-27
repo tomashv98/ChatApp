@@ -1,5 +1,6 @@
 const socket = io();
 
+
 socket.on("getRoomList", (rooms) => {
   if (rooms && rooms.length > 0) {
     const select = document.querySelector("#roomlist")
@@ -8,5 +9,4 @@ socket.on("getRoomList", (rooms) => {
       select.insertAdjacentHTML("beforeend", html)
     });
   }
-
 })
