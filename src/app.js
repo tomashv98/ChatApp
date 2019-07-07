@@ -62,7 +62,7 @@ io.on("connection", (socket) => {
 
     socket.emit("message", generateMes("ChatApp", `Welcome to chatroom no.${user.room}`))
 
-    socket.broadcast.to(user.room).emit("userJoin", generateMes("ChatApp", `has joined the chat`))
+    socket.broadcast.to(user.room).emit("userJoin", generateMes(user.username, `has joined the chat`))
 
     io.to(user.room).emit("roomData", {
       room: user.room,
@@ -98,7 +98,7 @@ io.on("connection", (socket) => {
   socket.on("disconnect", () => {
     const user = removeUser(socket.id);
     if (user) {
-      io.to(user.room).emit("userLeft", generateMes("ChatApp", ` had left the chat`))
+      io.to(user.room).emit("userLeft", generateMes(user.username, ` had left the chat`))
       io.to(user.room).emit("roomData", {
         room: user.room,
         users: getUsersInRoom(user.room)
