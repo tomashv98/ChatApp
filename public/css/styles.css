@@ -189,3 +189,33 @@ button:disabled {
   font-weight: 300;
   padding: 12px 24px 0 24px;
 }
+#message-button img {
+  width: 20px;
+  margin: auto;
+}
+@media screen and (max-width: 750px) {
+  .form {
+    width: 80%;
+    height: 300px;
+  }
+  #message-form {
+    margin-right: 5px;
+  }
+  #message-form input {
+    width: 70%;
+    padding-right: 0;
+    margin-right: 5px;
+  }
+  #message-form button {
+    width: 30%;
+    padding: 0;
+  }
+  .compose {
+    padding-right: 10px;
+  }
+  #message-button img {
+    width: 15px;
+    margin: auto;
+    padding: 0;
+  }
+}

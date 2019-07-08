@@ -1,80 +1,85 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ChatApp</title>
+    <link rel="icon" href="./img/favicon.png" />
+    <!--<link rel="stylesheet" href="./css/styles.min.css"> -->
+    <link rel="stylesheet" href="./css/main.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
 
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ChatApp</title>
-  <link rel="icon" href="./img/favicon.png">
-  <!--<link rel="stylesheet" href="./css/styles.min.css"> -->
-  <link rel="stylesheet" href="./css/main.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-
-<body>
-  <div class="form">
-    <div class="head" class="signup">
-      <div onclick="swap(this);" data-tab="login" class="login-tab">
-        JOIN ROOM
+  <body>
+    <div class="form">
+      <div class="head" class="signup">
+        <div onclick="swap(this);" data-tab="login" class="login-tab">
+          JOIN ROOM
+        </div>
+        <div onclick="swap(this);" data-tab="signup" class="signup-tab">
+          CREATE ROOM
+        </div>
       </div>
-      <div onclick="swap(this);" data-tab="signup" class="signup-tab">
-        CREATE ROOM
+      <div class="body" id="form-body">
+        <div class="login">
+          <br />
+          <br />
+          <form action="/chat.html">
+            <div class="form-row">
+              <input
+                type="text"
+                name="username"
+                placeholder="Display Name"
+                autofocus
+              />
+              <br />
+              <br />
+              <br />
+              <select name="room" id="roomlist"> </select>
+              <br />
+              <br />
+              <button>Join Room</button>
+            </div>
+          </form>
+        </div>
+        <div class="signup">
+          <br />
+          <br />
+          <form action="/chat.html">
+            <div class="form-row">
+              <input
+                type="text"
+                name="username"
+                placeholder="Display Name"
+                autofocus
+              />
+            </div>
+            <br />
+            <br />
+            <div class="form-row">
+              <input type="text" name="room" placeholder="Room Name" />
+              <button>Create Room</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
-    <div class="body" id="form-body">
-      <div class="login">
-        <br>
-        <br>
-        <form action="/chat.html">
-          <div class="form-row">
-            <input type="text" name="username" placeholder="Display Name" autofocus>
-            <br>
-            <br>
-            <br>
-            <select name="room" id="roomlist">
-
-            </select>
-            <br>
-            <br>
-            <button>Join Room</button>
-          </div>
-
-        </form>
-      </div>
-      <div class="signup">
-        <br>
-        <br>
-        <form action="/chat.html">
-          <div class="form-row">
-            <input type="text" name="username" placeholder="Display Name" autofocus>
-          </div>
-          <br>
-          <br>
-          <div class="form-row">
-            <input type="text" name="room" placeholder="Room Name">
-            <button>Create Room</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-  <script>
-    function swap(referTo) {
-      if (referTo.getAttribute("data-tab") == "login") {
-        document.getElementById("form-body").classList.remove('active');
-        referTo.parentNode.classList.remove('signup');
-      } else {
-        document.getElementById("form-body").classList.add('active');
-        referTo.parentNode.classList.add('signup');
+    <script>
+      function swap(referTo) {
+        if (referTo.getAttribute('data-tab') == 'login') {
+          document.getElementById('form-body').classList.remove('active');
+          referTo.parentNode.classList.remove('signup');
+        } else {
+          document.getElementById('form-body').classList.add('active');
+          referTo.parentNode.classList.add('signup');
+        }
       }
-    }
-  </script>
-  <script src="/socket.io/socket.io.js"></script>
-  <script src="./js/rooms.js"></script>
+    </script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="./js/rooms.js"></script>
 
-
-  <!-- 
+    <!-- 
   <div class="centered-form">
     <div class="centered-form__box">
       <h1>Join</h1>
@@ -87,7 +92,5 @@
       </form>
     </div>
   </div>
-  -->
-</body>
-
+  --></body>
 </html>
